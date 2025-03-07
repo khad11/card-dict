@@ -1,37 +1,51 @@
 import React, { useRef } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../components/ui/button";
 
-import { Label } from "./ui/label";
+// toast
+import { ToastContainer, toast } from "react-toastify";
+
+import { Label } from "../components/ui/label";
 import { instance } from "../axios";
+import { Link, useNavigate } from "react-router-dom";
 
-function Signup() {
+function Login({ setUser }) {
+  // use ref
   const inputUserName = useRef();
-  const inputEmail = useRef(null);
   const inputPassword = useRef(null);
-  const inputPassword2 = useRef(null);
 
+  // navigate
+  const navigate = useNavigate();
+
+  //toast
+  const notifyError = (message) => toast.error(message);
+
+  //   handle submit  login tugmasi bosilganda ishlaydi
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputUserName.current.value);
-
     const userData = {
       username: inputUserName.current.value,
-      email: inputEmail.current.value,
       password: inputPassword.current.value,
-      password2: inputPassword2.current.value,
     };
     console.log(userData);
 
+    // axios dan foydalandim
     instance
-      .post("/user/register/", userData)
+      .post("/auth/token/", userData)
       .then((data) => {
-        console.log(data);
+        const token = data.data.access;
+        if (data.status === 200) {
+          localStorage.setItem("token", token);
+          setUser(token);
+          navigate("/");
+        } else {
+          notifyError();
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  ``;
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 p-6">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
@@ -52,18 +66,6 @@ function Signup() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="john@example.com"
-              ref={inputEmail}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
-            />
-          </div>
-
-          <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <input
               name="password"
@@ -74,26 +76,24 @@ function Signup() {
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <input
-              name="password2"
-              type="password"
-              ref={inputPassword2}
-              autoComplete="new-password"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
-            />
-          </div>
-
           <div className="w-full">
             <Button className="w-full" type="submit">
-              Register
+              Login
             </Button>
+            <ToastContainer />
           </div>
         </form>
+        <p className="text-center mt-3 text-sm italic">
+          {" "}
+          if you haven't a accaunt{" "}
+          <Link to="/register" className="uppercase opacity-20">
+            {" "}
+            Register
+          </Link>
+        </p>
       </div>
     </div>
   );
 }
 
-export default Signup;
+export default Login;
