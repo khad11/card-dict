@@ -5,7 +5,7 @@ function ProtectedRoutes({ user, children }) {
   if (user) {
     return children;
   }
-  return <Navigate to="login" />;
+  return <Navigate to="/landing" />;
 }
 
 export default ProtectedRoutes;

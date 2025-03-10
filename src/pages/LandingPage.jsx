@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
 import React from "react";
-import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
+import { Button } from "../components/ui/button";
 import { BookOpen } from "lucide-react";
 
-function Navbar() {
+function LandingPage() {
+  console.log(1);
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -55,4 +56,22 @@ function Navbar() {
     </header>
   );
 }
-export default Navbar;
+export default LandingPage;
+
+const features = [
+  {
+    title: "PDF Reader",
+    description:
+      "Kitoblaringizni yuklang va o‘qing. PDF fayllarni oson oching va ko‘ring.",
+  },
+  {
+    title: "So‘zlarni Tarjima Qilish",
+    description:
+      "Belgilanadigan so‘zlarni avtomatik tarjima qilish va izohlash imkoniyati.",
+  },
+  {
+    title: "Topshiriqlar",
+    description:
+      "Belgilangan so‘zlar bo‘yicha interaktiv topshiriqlar orqali o‘rganish.",
+  },
+];

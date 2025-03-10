@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { instance } from "../axios";
 import { useNavigate } from "react-router-dom";
+import LandingPage from "./LandingPage";
 
 function Home() {
   const [data, setData] = useState();
@@ -10,7 +11,7 @@ function Home() {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token); // Tokenni olish
+    console.log(token);
     if (!token) {
       console.log("Token topilmadi!");
 
@@ -42,12 +43,7 @@ function Home() {
 
   return (
     <div>
-      <Navbar />
-
-      <div>
-        <p></p>
-        {data && <div>{data.username}</div>}
-      </div>
+      <h1>home page</h1>
     </div>
   );
 }
