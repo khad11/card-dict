@@ -8,7 +8,7 @@ import {
 // main layout
 import MainLayout from "./layout/MainLayout";
 
-// component
+// components
 import ErrorPage from "./components/ErrorPage";
 import ProtectedRoutes from "./components/Protectedroutes";
 
@@ -16,22 +16,36 @@ import ProtectedRoutes from "./components/Protectedroutes";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
-  const [user, setUser] = useState(localStorage.getItem("token"));
+  const [user, setUser] = useState(() => {
+    return localStorage.getItem("token") || null;
+  });
 
   useEffect(() => {
     const handleStorageChange = () => {
-      setUser(localStorage.getItem("token"));
+      const token = localStorage.getItem("token");
+      setUser(token ? token : null);
     };
 
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
+
   const routes = createBrowserRouter([
     {
       path: "/",
+      element:
+        user === localStorage.getItem("token") ? (
+          <Navigate to="/home" />
+        ) : (
+          <LandingPage />
+        ),
       errorElement: <ErrorPage />,
+    },
+    {
+      path: "/home",
       element: (
         <ProtectedRoutes user={user}>
           <MainLayout />
@@ -39,17 +53,19 @@ function App() {
       ),
       children: [{ index: true, element: <Home /> }],
     },
+    { path: "/landing", element: <LandingPage /> },
     {
       path: "/login",
-      element: user ? <Navigate to="/" /> : <Login setUser={setUser} />,
+      element: <Login setUser={setUser} />,
       errorElement: <ErrorPage />,
     },
     {
       path: "/register",
-      element: user ? <Navigate to="/" /> : <Signup setUser={setUser} />,
+      element: <Signup setUser={setUser} />,
       errorElement: <ErrorPage />,
     },
   ]);
+
   return <RouterProvider router={routes} />;
 }
 
