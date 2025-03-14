@@ -2,58 +2,49 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { BookOpen } from "lucide-react";
+import { div } from "framer-motion/client";
 
 function LandingPage() {
-  console.log(1);
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
-          <BookOpen className="h-6 w-6 text-primary" />
-          <Link to="/" className="text-xl font-bold text-foreground">
-            Easy-Learn
-          </Link>
-        </div>
+    <div className="align-elements   bg-slate-900 h-screen text-white">
+      <div className="sticky top-0 z-50 w-full  mb-10 bg-slate-800 ">
+        <div className="container flex h-16 items-center justify-between px-5">
+          <div className="flex items-center gap-2">
+            <BookOpen className="h-6 w-6 " />
+            <Link to="/" className="text-xl font-bold ">
+              Easy-Learn
+            </Link>
+          </div>
 
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link
-            to="/"
-            className={`text-sm transition-colors hover:text-primary `}
-          >
-            Home
-          </Link>
-          <Link
-            to="/login"
-            className={`text-sm transition-colors hover:text-primary `}
-          >
-            About
-          </Link>
-          <Link
-            to="#courses"
-            className="text-sm text-muted-foreground transition-colors hover:text-primary"
-          >
-            Courses
-          </Link>
-          <Link
-            to="#pricing"
-            className="text-sm text-muted-foreground transition-colors hover:text-primary"
-          >
-            Pricing
-          </Link>
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <Link to="/login">
-            <Button variant="ghost" size="sm">
-              Log in
-            </Button>
-          </Link>
-          <Link to="/signup">
-            <Button size="sm">Sign up</Button>
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link to="/login">
+              <Button variant="ghost" size="sm">
+                Log in
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button size="sm" variant="default">
+                Sign up
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
-    </header>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  p-6 ">
+        {features.map((f, index) => {
+          return (
+            <div
+              key={index}
+              className="p-6 mt-20 bg-slate-800  rounded-lg w-[250px]"
+            >
+              <h1 className="text-2xl text-center font-bold">{f.title}</h1>
+              <p className="text-sm text-center p-2">{f.description}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 export default LandingPage;

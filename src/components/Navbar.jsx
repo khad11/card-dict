@@ -3,10 +3,11 @@ import React from "react";
 import { Button } from "./ui/button";
 import { BookOpen } from "lucide-react";
 
-function Navbar() {
+function Navbar({ data }) {
+  console.log(data);
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 align-elements">
+      <div className=" flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <BookOpen className="h-6 w-6 text-primary" />
           <Link to="/" className="text-xl font-bold text-foreground">
@@ -22,33 +23,17 @@ function Navbar() {
             Home
           </Link>
           <Link
-            to="/login"
+            to="/about"
             className={`text-sm transition-colors hover:text-primary `}
           >
             About
           </Link>
-          <Link
-            to="#courses"
-            className="text-sm text-muted-foreground transition-colors hover:text-primary"
-          >
-            Courses
-          </Link>
-          <Link
-            to="#pricing"
-            className="text-sm text-muted-foreground transition-colors hover:text-primary"
-          >
-            Pricing
-          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link to="/login">
-            <Button variant="ghost" size="sm">
-              Log in
-            </Button>
-          </Link>
-          <Link to="/signup">
-            <Button size="sm">Sign up</Button>
+          <h3>{data && data.username}</h3>
+          <Link to="">
+            <Button size="sm">img</Button>
           </Link>
         </div>
       </div>

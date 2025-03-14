@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import { instance } from "../axios";
 import { useNavigate } from "react-router-dom";
-import LandingPage from "./LandingPage";
+import Navbar from "../components/Navbar";
+import PDFViewer from "../components/PDFViewer";
 
 function Home() {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
-
+  console.log(data);
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -35,15 +35,17 @@ function Home() {
         }
         setLoading(false);
       });
-  }, [navigate]);
+  }, []);
 
   if (loading) {
     return <div>loading..... user</div>;
   }
 
   return (
-    <div>
-      <h1>home page</h1>
+    <div className="align-elements">
+      <Navbar data={data} />
+
+      <PDFViewer />
     </div>
   );
 }

@@ -69,9 +69,7 @@ function Signup({ setUser }) {
       .post("/user/register/", userData)
       .then((data) => {
         console.log(data);
-        // const token = data.data.access;
-        // localStorage.setItem("token", token);
-        // setUser(token);
+
         navigate("/");
         notifySuccess();
         inputUserName.current.value = "";
@@ -145,9 +143,9 @@ function Signup({ setUser }) {
           </div>
         </form>
         <p className="text-center mt-3 text-sm italic">
-          if you have a accaunt
-          <Link to="/login" className="uppercase opacity-20">
-            login
+          Do you have an account?
+          <Link to="/login" className="text-red-600 underline ml-2">
+            Login
           </Link>
         </p>
       </div>
