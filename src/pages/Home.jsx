@@ -7,7 +7,6 @@ import PDFViewer from "../components/PDFViewer";
 function Home() {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
-  console.log(data);
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");

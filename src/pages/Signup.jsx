@@ -68,8 +68,6 @@ function Signup({ setUser }) {
     instance
       .post("/user/register/", userData)
       .then((data) => {
-        console.log(data);
-
         navigate("/");
         notifySuccess();
         inputUserName.current.value = "";
