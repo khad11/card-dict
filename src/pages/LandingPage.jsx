@@ -2,11 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { BookOpen } from "lucide-react";
-import { div } from "framer-motion/client";
 
 function LandingPage() {
   return (
-    <div className="align-elements   bg-slate-900 h-screen text-white">
+    <div className=" bg-slate-900 h-screen text-white align-elements">
       <div className="sticky top-0 z-50 w-full  mb-10 bg-slate-800 ">
         <div className="container flex h-16 items-center justify-between px-5">
           <div className="flex items-center gap-2">
